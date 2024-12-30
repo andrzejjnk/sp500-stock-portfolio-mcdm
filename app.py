@@ -1,6 +1,8 @@
 import streamlit as st
 from app_utils.pages.topsis_page import topsis_page
 from app_utils.pages.aras_page import aras_page
+from app_utils.pages.vikor_page import vikor_page
+from app_utils.pages.copras_page import copras_page
 
 st.set_page_config(
     page_title="SP500 Portfolio Optimization",
@@ -11,7 +13,7 @@ st.set_page_config(
 with st.sidebar:
     tabs = st.radio(
         "Navigate", 
-        ["Main Page", "TOPSIS", "ARAS"],
+        ["Main Page", "TOPSIS", "ARAS", "VIKOR", "COPRAS", "WASPAS"],
         index=0
     )
 
@@ -29,3 +31,9 @@ elif tabs == "TOPSIS":
 
 elif tabs == "ARAS":
     aras_page()
+
+elif tabs == "VIKOR":
+    vikor_page()
+
+elif tabs == "COPRAS":
+    copras_page()
