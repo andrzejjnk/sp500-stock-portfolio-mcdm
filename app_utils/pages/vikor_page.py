@@ -44,7 +44,7 @@ def vikor_page():
     # Load the decision matrix
     data = pd.read_csv(decision_matrix_path)
     st.write("### Decision Matrix")
-    st.dataframe(data.head())
+    st.dataframe(data)
 
     # Default weights and criteria types
     default_weights = [0.2, 0.15, 0.2, 0.1, 0.15, 0.1, 0.05, 0.05]
