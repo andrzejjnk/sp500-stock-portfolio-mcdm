@@ -63,7 +63,7 @@ def preprocess_sp500_data(start_date: str, end_date: str, stocks_file: str, comp
     decision_matrix = pd.merge(companies, stock_indicators, on='Symbol')  # Merge companies with stock indicators
 
     # Step 7: Select relevant columns for the decision matrix
-    decision_matrix = decision_matrix[['Symbol', 'Revenuegrowth', 'Ebitda', 'Marketcap', 'Weight',
+    decision_matrix = decision_matrix[['Symbol', 'Shortname', 'Revenuegrowth', 'Ebitda', 'Marketcap', 'Weight',
                                        'Volatility', 'Average Close Price', 'Return', 'Average Volume']]
 
     # Step 8: Normalize the columns of the decision matrix
@@ -73,6 +73,7 @@ def preprocess_sp500_data(start_date: str, end_date: str, stocks_file: str, comp
         decision_matrix[col] = normalize_column(decision_matrix[col])  # Normalize the decision matrix columns
 
     # Step 9: Save the complete decision matrix to a CSV file
+    decision_matrix = decision_matrix.dropna()
     decision_matrix.to_csv(output_decision_matrix_file, index=False)  # Save the complete decision matrix
 
     print(decision_matrix.head())
