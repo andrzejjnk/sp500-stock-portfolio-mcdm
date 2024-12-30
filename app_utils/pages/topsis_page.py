@@ -81,9 +81,8 @@ def topsis_page():
     rankings, scores = topsis(decision_matrix, weights, criteria_types)
 
     data['TOPSIS Score'] = scores
-    data['Rank'] = rankings + 1  # 1-based indexing
-
-    sorted_data = data.sort_values(by='Rank')
+    sorted_data = data.sort_values(by='TOPSIS Score', ascending=False)
+    sorted_data['Rank'] = range(1, len(rankings) + 1)
 
     st.markdown("---")
     st.write("## 🏆 TOPSIS Results")
