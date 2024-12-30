@@ -1,4 +1,5 @@
 import streamlit as st
+from app_utils.pages.main_page import main_page
 from app_utils.pages.topsis_page import topsis_page
 from app_utils.pages.aras_page import aras_page
 from app_utils.pages.vikor_page import vikor_page
@@ -21,12 +22,7 @@ with st.sidebar:
 
 
 if tabs == "Main Page":
-    st.title("📊 SP500 Portfolio Optimization using MCDM methods")
-    st.write("""
-    Welcome to the SP500 Portfolio Optimization application!  
-    Several MCDM methods are being used to help identify the best companies based on multi-criteria decision-making analyses.  
-    Use the sidebar menu to navigate to the analysis results.
-    """)
+    main_page()
 
 elif tabs == "TOPSIS":
     topsis_page()

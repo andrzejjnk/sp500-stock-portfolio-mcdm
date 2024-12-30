@@ -79,12 +79,12 @@ def preprocess_sp500_data(start_date: str, end_date: str, stocks_file: str, comp
     print(decision_matrix.head())
     print(decision_matrix.columns)
 
-preprocess_sp500_data(
-    start_date='2024-01-01', 
-    end_date='2024-12-20', 
-    stocks_file='data/raw/sp500_stocks.csv', 
-    companies_file='data/raw/sp500_companies.csv', 
-    output_stocks_file='data/preprocessed/sp500_stocks_clean.csv', 
-    output_indicators_file='data/preprocessed/sp500_stock_indicators.csv', 
-    output_decision_matrix_file='data/preprocessed/sp500_complete_decision_matrix.csv'
-)
+# preprocess_sp500_data(
+#     start_date='2024-01-01', 
+#     end_date='2024-12-20', 
+#     stocks_file='data/raw/sp500_stocks.csv', 
+#     companies_file='data/raw/sp500_companies.csv', 
+#     output_stocks_file='data/preprocessed/sp500_stocks_clean.csv', 
+#     output_indicators_file='data/preprocessed/sp500_stock_indicators.csv', 
+#     output_decision_matrix_file='data/preprocessed/sp500_complete_decision_matrix.csv'
+# )
