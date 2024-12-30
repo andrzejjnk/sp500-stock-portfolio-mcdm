@@ -29,7 +29,7 @@ def vikor_page():
            - \( S_i \): Sum of weighted normalized values for each alternative.
            - \( R_i \): Maximum weighted normalized value for each alternative.
         4. Calculate the \( Q_i \) compromise solution score for each alternative.
-        5. Rank alternatives based on \( Q_i \) (smaller values are better).
+        5. Rank alternatives based on \( Q_i \) (higher values are better).
         """)
 
     # Path to the decision matrix file
