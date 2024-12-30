@@ -3,6 +3,7 @@ from app_utils.pages.topsis_page import topsis_page
 from app_utils.pages.aras_page import aras_page
 from app_utils.pages.vikor_page import vikor_page
 from app_utils.pages.copras_page import copras_page
+from app_utils.pages.waspas_page import waspas_page
 
 st.set_page_config(
     page_title="SP500 Portfolio Optimization",
@@ -37,3 +38,6 @@ elif tabs == "VIKOR":
 
 elif tabs == "COPRAS":
     copras_page()
+
+elif tabs == "WASPAS":
+    waspas_page()

@@ -42,7 +42,7 @@ def vikor(decision_matrix, weights, criteria_types):
     v = 0.5  # Weight of the strategy of majority rule (S)
     Q = v * (S - S_min) / (S_max - S_min) + (1 - v) * (R - R_min) / (R_max - R_min)
 
-    # Step 6: Rank alternatives by Q (ascending order, smaller is better)
+    # Step 6: Rank alternatives by Q (ascending order, higher is better)
     rankings = Q.argsort()
 
     return rankings, Q, S, R
