@@ -7,6 +7,7 @@ from app_utils.pages.copras_page import copras_page
 from app_utils.pages.waspas_page import waspas_page
 from app_utils.pages.taxonomy_page import taxonomy_page
 from app_utils.pages.aggregation_page import aggregation_page
+from app_utils.pages.visualizations_pages import visualizations_page
 
 st.set_page_config(
     page_title="SP500 Portfolio Optimization",
@@ -17,7 +18,7 @@ st.set_page_config(
 with st.sidebar:
     tabs = st.radio(
         "Navigate", 
-        ["Main Page", "TOPSIS", "TAXONOMY", "ARAS", "VIKOR", "COPRAS", "WASPAS", "AGGREGATION"],
+        ["Main Page", "TOPSIS", "TAXONOMY", "ARAS", "VIKOR", "COPRAS", "WASPAS", "AGGREGATION", "VISUALIZATIONS"],
         index=0
     )
 
@@ -44,3 +45,6 @@ elif tabs == "WASPAS":
 
 elif tabs == "AGGREGATION":
     aggregation_page()
+
+elif tabs == "VISUALIZATIONS":
+    visualizations_page()
