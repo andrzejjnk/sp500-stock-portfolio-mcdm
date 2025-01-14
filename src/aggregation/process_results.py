@@ -9,7 +9,7 @@ def process_csv_files(file_paths):
     - file_paths (list of str): List of file paths to the CSV files.
 
     Returns:
-    - ranking_matrix (numpy array): Matrix where rows are alternatives (stocks) 
+    - ranking_matrix (numpy array): Matrix where rows are alternatives (stocks)
       and columns are rankings from different methods.
     - alternatives (list): List of stock symbols (alternatives).
     - shortnames (list): List of company shortnames (names corresponding to symbols).
@@ -35,7 +35,6 @@ def process_csv_files(file_paths):
     ranking_matrix = np.array(rankings).T
     return ranking_matrix, alternatives, shortnames
 
-
 def create_mcdm_rankings_file(file_paths, output_file, method_names):
     """
     Creates a combined rankings CSV file from multiple MCDM results.
@@ -54,7 +53,6 @@ def create_mcdm_rankings_file(file_paths, output_file, method_names):
     rankings_df.to_csv(output_file, index=False)
     print(f"Combined rankings saved to {output_file}")
 
-
 file_paths = [
     "results/sp500_topsis_results.csv",
     "results/sp500_aras_results.csv",
@@ -64,8 +62,19 @@ file_paths = [
     "results/sp500_taxonomy_results.csv"
 ]
 
+forecasted_file_paths = [
+    "results/sp500_forecasted_topsis_results.csv",
+    "results/sp500_forecasted_aras_results.csv",
+    "results/sp500_forecasted_vikor_results.csv",
+    "results/sp500_forecasted_copras_results.csv",
+    "results/sp500_forecasted_waspas_results.csv",
+    "results/sp500_forecasted_taxonomy_results.csv"
+]
+
 method_names = ["TOPSIS", "ARAS", "VIKOR", "COPRAS", "WASPAS", "TAXONOMY"]
-output_file = "results/mcdm_rankings.csv"
+output_file = "results/normal_mcdm_rankings.csv"
+forecasted_output_file = "results/forecasted_mcdm_rankings.csv"
 
 def create_mcdm_ranking_wrapper():
     create_mcdm_rankings_file(file_paths, output_file, method_names)
+    create_mcdm_rankings_file(forecasted_file_paths, forecasted_output_file, method_names)
