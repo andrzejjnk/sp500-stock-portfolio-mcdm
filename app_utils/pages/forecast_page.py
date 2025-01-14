@@ -45,19 +45,17 @@ def forecast_page():
     # Forecasting parameters
     st.write("### Select Forecasting Parameters")
     forecast_period = st.slider("Select number of days to forecast:", min_value=1, max_value=365, value=7)
-    
+
     # Generate forecast
     if st.button("Generate Forecast"):
         with st.spinner("Forecasting all columns..."):
             forecast_output_file = 'data/forecasted/forecasted_stock.csv'
             forecast_all_columns(stocks_data, forecast_period, forecast_output_file)
             transform_forecast_data(forecast_output_file, forecast_output_file)
-
             st.success(f"Forecast complete! Results saved to {forecast_output_file}")
 
-            forecasted_data = pd.read_csv(forecast_output_file)
-
             # Extract start and end dates from the forecasted data
+            forecasted_data = pd.read_csv(forecast_output_file)
             forecasted_data['Date'] = pd.to_datetime(forecasted_data['Date'])
             start_date = forecasted_data['Date'].min().strftime('%Y-%m-%d')
             end_date = forecasted_data['Date'].max().strftime('%Y-%m-%d')
@@ -76,11 +74,15 @@ def forecast_page():
                 output_indicators_file=f'{forecasted_preprocessed_dir}/sp500_forecasted_stock_indicators.csv',
                 output_decision_matrix_file=f'{forecasted_preprocessed_dir}/sp500_forecasted_complete_decision_matrix.csv'
             )
-    
-    # Display a sample of the forecasted data
-    forecast_output_file = 'data/forecasted/forecasted_stock.csv'
-    forecasted_data = pd.read_csv(forecast_output_file)
-    forecasted_data['Date'] = pd.to_datetime(forecasted_data['Date'])
-    st.write(f"### Forecasted Data ({forecasted_data['Date'].min().strftime('%Y-%m-%d')} - {forecasted_data['Date'].max().strftime('%Y-%m-%d')})")
-    st.dataframe(forecasted_data)
+            st.success("Data preprocessing complete!")
 
+    # Check if the forecasted data file exists
+    forecast_output_file = 'data/forecasted/forecasted_stock.csv'
+    if os.path.exists(forecast_output_file):
+        # Display a sample of the forecasted data
+        forecasted_data = pd.read_csv(forecast_output_file)
+        forecasted_data['Date'] = pd.to_datetime(forecasted_data['Date'])
+        st.write(f"### Forecasted Data ({forecasted_data['Date'].min().strftime('%Y-%m-%d')} - {forecasted_data['Date'].max().strftime('%Y-%m-%d')})")
+        st.dataframe(forecasted_data)
+    else:
+        st.warning("Forecasted data file not found. Please generate the forecast first.")
