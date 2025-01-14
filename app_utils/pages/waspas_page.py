@@ -95,7 +95,7 @@ def waspas_page():
 
         st.markdown("---")
         st.write(f"## 🏆 {title} WASPAS Results")
-        st.dataframe(sorted_data[['Symbol', 'Shortname', 'WASPAS Score (W)', 'WSM Score (Q1)', 'WPM Score (Q2)', 'Rank']])
+        st.dataframe(sorted_data[['Symbol', 'Shortname', 'WASPAS Score (W)', 'Rank']])
 
         if st.button(f"Download {title} WASPAS results", key=f"download_{title}"):
             results_path.parent.mkdir(parents=True, exist_ok=True)
