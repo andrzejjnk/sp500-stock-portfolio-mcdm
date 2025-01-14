@@ -27,23 +27,18 @@ def forecast_all_columns(data, forecast_period, output_file):
     - forecast_period (int): Number of days to forecast.
     - output_file (str): Path to save the forecasted data as a CSV file.
     """
-    # Ensure the directory for the output file exists
     output_dir = os.path.dirname(output_file)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # Remove invalid rows
     data = filter_invalid_data(data)
 
     forecast_results = []
 
-    # Ensure 'Date' column is in datetime format
     data['Date'] = pd.to_datetime(data['Date'])
 
-    # Numeric columns to forecast (excluding 'Symbol' and 'Date')
     columns_to_forecast = data.select_dtypes(include=[np.number]).columns.tolist()
 
-    # Loop through each stock symbol
     for symbol in data['Symbol'].unique():
         stock_data = data[data['Symbol'] == symbol].sort_values('Date')
 
@@ -52,22 +47,19 @@ def forecast_all_columns(data, forecast_period, output_file):
             print(f"Skipping {symbol}: Not enough data points for ARIMA.")
             continue
 
-        # Forecast each column independently
         forecasted_values = {'Symbol': [], 'Date': [], 'Column': [], 'Forecasted Value': []}
         for column in columns_to_forecast:
             try:
                 series = stock_data[column].values
 
                 # Fit ARIMA model
-                model = ARIMA(series, order=(1, 1, 1))  # Example ARIMA(1,1,1) configuration
+                model = ARIMA(series, order=(1, 1, 1))  # ARIMA(1,1,1) configuration
                 fitted_model = model.fit()
                 forecast = fitted_model.forecast(steps=forecast_period)
 
-                # Create forecasted dates
                 last_date = stock_data['Date'].iloc[-1]
                 forecast_dates = [last_date + pd.Timedelta(days=i) for i in range(1, forecast_period + 1)]
 
-                # Add results for this column
                 for date, value in zip(forecast_dates, forecast):
                     forecasted_values['Symbol'].append(symbol)
                     forecasted_values['Date'].append(date)
@@ -78,7 +70,6 @@ def forecast_all_columns(data, forecast_period, output_file):
                 print(f"Error forecasting {symbol}, column {column}: {e}")
                 continue
 
-        # Convert the dictionary to a DataFrame and append to results
         forecast_df = pd.DataFrame(forecasted_values)
         forecast_results.append(forecast_df)
 
