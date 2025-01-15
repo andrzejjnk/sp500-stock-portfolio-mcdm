@@ -44,7 +44,7 @@ def forecast_page():
 
     # Forecasting parameters
     st.write("### Select Forecasting Parameters")
-    forecast_period = st.slider("Select number of days to forecast:", min_value=1, max_value=365, value=7)
+    forecast_period = st.slider("Select number of days to forecast:", min_value=1, max_value=365, value=90)
 
     # Generate forecast
     if st.button("Generate Forecast"):
