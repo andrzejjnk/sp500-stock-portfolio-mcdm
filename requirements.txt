@@ -5,3 +5,4 @@ pathlib
 kaleido
 statsmodels
 plotly
+scikit-learn
